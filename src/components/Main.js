@@ -1,10 +1,15 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 import styled, { keyframes } from 'styled-components'
 import PowerButton from '../subComponents/PowerButton'
 import LogoComponent from '../subComponents/LogoComponent'
 import SocialIcon from  '../subComponents/SocialIcon'
 import { NavLink } from 'react-router-dom'
 import { YinYang } from './AllSvgs'
+import Intro from './Intro'
+
+
+
 
 
 const MainContainer = styled.div`
@@ -92,7 +97,7 @@ font-family: 'Karia';
 
 `
 
-const Blog = styled.div`
+const Blog = styled(NavLink)`
 
 color: ${props => props.theme.text};
 position: absolute;
@@ -105,13 +110,12 @@ font-family: 'Karia';
 
 `
 
-const Work = styled.div`
+const Work = styled(NavLink)`
 
-color: ${props => props.theme.text};
+color: ${props => props.click ? props.theme.body : props.theme.text};
 position: absolute;
 top: 50%;
-left: 2rem;
-left: calc(1rem + 2vw);
+left: calc(1rem + 1vw);
 transform: rotate(-90deg) translate(-50%, -50%);
 text-decoration: none;
 z-index: 1;
@@ -133,7 +137,7 @@ justify-content: space-evenly;
 
 const About = styled(NavLink)`
 
-color: ${props => props.theme.text};
+color: ${props => props.click ? props.theme.body : props.theme.text};
 text-decoration: none;
 z-index: 1;
 
@@ -160,8 +164,8 @@ const Main = () => {
       <Container>
 
         <PowerButton />
-        <LogoComponent />
-        <SocialIcon />
+        <LogoComponent theme={click ? 'dark' : 'light'} />
+        <SocialIcon  theme={click ? 'dark' : 'light'}  />
 
         <DarkDiv click={click}/>
 
@@ -172,38 +176,64 @@ const Main = () => {
 
 
         <Contact traget="_blank" to={{pathname:"mailto:....@gmail.com"}}>
-          <h2>
+          <motion.h2
+          
+          whileHover={{scale: 1.1}}
+          whileTap={{scale:0.9}}
+
+          >
             Say hi..
-          </h2>
+          </motion.h2>
         </Contact>
 
         <Blog to="/blog">
-          <h2>
+          <motion.h2
+          
+          whileHover={{scale: 1.1}}
+          whileTap={{scale:0.9}}
+
+          >
             Blog
-          </h2>
+          </motion.h2>
         </Blog>
 
-        <Work to="/work">
-          <h2>
+        <Work to="/work" click={click}>
+          <motion.h2
+          
+          whileHover={{scale: 1.1}}
+          whileTap={{scale:0.9}}
+          
+          >
             Work
-          </h2>
+          </motion.h2>
         </Work>
 
         <BottomBar>
-          <About to="/about">
-                <h2>
+          <About to="/about" click={click}>
+                <motion.h2
+                
+                whileHover={{scale: 1.1}}
+                whileTap={{scale:0.9}}
+                
+                >
                   About
-                </h2>
+                </motion.h2>
           </About>
-          <Skills to="/skills">
-            <h2>
+          <Skills to="/skills" click={click}>
+            <motion.h2
+            
+            whileHover={{scale: 1.1}}
+            whileTap={{scale:0.9}}
+            
+            >
                 My Skills
-            </h2>
+            </motion.h2>
           </Skills>
         </BottomBar>
 
 
       </Container>
+      {click ? <Intro click={click} /> : null}
     </MainContainer>
   )
 }

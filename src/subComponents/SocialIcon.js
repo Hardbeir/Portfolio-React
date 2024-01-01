@@ -2,11 +2,12 @@ import React from 'react'
 import {NavLink} from 'react-router-dom'
 import { Facebook, Github, Twitter, YouTube} from '../components/AllSvgs'
 import styled from 'styled-components'
+import {darkTheme} from '../components/Themes'
 
 const Line = styled.span`
 width: 2px;
 height: 8rem;
-background-color: ${props => props.theme.text};
+background-color: ${props => props.color === 'dark' ? darkTheme.text : darkTheme.body};
 
 `
 
@@ -28,31 +29,31 @@ z-index: 3;
 
 `
 
-const SocialIcon = () => {
+const SocialIcon = (props) => {
   return (
     <Icons>
         <div>
             <NavLink style={{color:'inherit'}} target='_blank' to={{pathname:"https/"}}>
-                <Github width={30} height={25}/>
+                <Github width={30} height={25} fill={props.theme === "dark" ? darkTheme.text : darkTheme.body } />
             </NavLink>
         </div>
         <div>
             <NavLink style={{color:'inherit'}} target='_blank' to={{pathname:"https/"}}>
-                <Twitter width={30} height={25}/>
+                <Twitter width={30} height={25} fill={props.theme === "dark" ? darkTheme.text : darkTheme.body } />
             </NavLink>
         </div>
         <div>
             <NavLink style={{color:'inherit'}} target='_blank' to={{pathname:"https/"}}>
-                <Facebook width={30} height={25}/>
+                <Facebook width={30} height={25} fill={props.theme === "dark" ? darkTheme.text : darkTheme.body } />
             </NavLink>
         </div>
         <div>
             <NavLink style={{color:'inherit'}} target='_blank' to={{pathname:"https/"}}>
-                <YouTube width={30} height={25}/>
+                <YouTube width={30} height={25} fill={props.theme === "dark" ? darkTheme.text : darkTheme.body } />
             </NavLink>
         </div>
 
-        <Line />
+        <Line color={props.theme}/>
     </Icons>
   )
 }
